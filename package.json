@@ -1,0 +1,21 @@
+{
+  "author": "Mihai Tomescu <matomesc@gmail.com> (https://github.com/matomesc)",
+  "name": "aye",
+  "description": "watch stuff and exec something when there's a change",
+  "version": "0.0.0",
+  "homepage": "https://github.com/matomesc/aye",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/matomesc/aye.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha -R spec"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
