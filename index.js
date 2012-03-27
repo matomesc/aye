@@ -14,7 +14,7 @@ module.exports = aye;
 
 function aye(command, includes, excludes) {
   var watching = [],
-      _busy = false;;
+      _busy = false;
 
   includes = (typeof includes === 'string') ? [includes] : includes || [];
   excludes = (typeof excludes === 'string') ? [excludes] : excludes || [];
@@ -34,7 +34,7 @@ function aye(command, includes, excludes) {
       if (stdout) { console.log(stdout); }
       return callback(null);
     });
-  }
+  };
 
   // map globs to full paths
   Seq(includes)
