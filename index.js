@@ -28,7 +28,7 @@ function aye(command, includes, excludes) {
         console.log('failed to exec: %s', command);
         if (error.msg) { console.log(error.msg); }
         if (stderr) { console.log(stderr); } 
-        return callback(err);
+        return callback(error);
       }
       console.log(['success'.green, '(%s ms):'.grey, '%s\n'].join(' '), t2 - t1, command);
       if (stdout) { console.log(stdout); }
