@@ -15,6 +15,9 @@ module.exports = aye;
 function aye(command, includes, excludes) {
   var watching = [];
 
+  includes = (typeof includes === 'string') ? [includes] : includes || [];
+  excludes = (typeof excludes === 'string') ? [excludes] : excludes || [];
+
   // a wrapper around command
   var exec = function () {
     var t1 = Date.now();
