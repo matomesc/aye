@@ -13,13 +13,14 @@ module.exports = aye;
 //
 
 function aye(command, includes, excludes) {
-  var watching = [];
+  var watching = [],
+      _busy = false;;
 
   includes = (typeof includes === 'string') ? [includes] : includes || [];
   excludes = (typeof excludes === 'string') ? [excludes] : excludes || [];
 
   // a wrapper around command
-  var exec = function () {
+  var exec = function (callback) {
     var t1 = Date.now();
     cp.exec(command, function (error, stdout, stderr) {
       var t2 = Date.now();
@@ -27,10 +28,11 @@ function aye(command, includes, excludes) {
         console.log('failed to exec: %s', command);
         if (error.msg) { console.log(error.msg); }
         if (stderr) { console.log(stderr); } 
-        return;
+        return callback(err);
       }
       console.log(['success'.green, '(%s ms):'.grey, '%s\n'].join(' '), t2 - t1, command);
       if (stdout) { console.log(stdout); }
+      return callback(null);
     });
   }
 
@@ -68,7 +70,13 @@ function aye(command, includes, excludes) {
       watching.forEach(function (_path) {
         console.log(_path);
         var watcher = fs.watch(_path, { persistent: true }, function (event, filename) {
-          exec.call(null);
+          if (_busy) {
+            return;
+          }
+          _busy = true;
+          exec.call({}, function (err) {
+            _busy = false;
+          });
         });
       });
       console.log();
