@@ -28,7 +28,7 @@ function aye(command, includes, excludes) {
         if (error.msg) { console.log(error.msg); }
         if (stderr) { console.log(stderr); } 
         return;
-      } 
+      }
       console.log(['success'.green, '(%s ms):'.grey, '%s\n'].join(' '), t2 - t1, command);
       if (stdout) { console.log(stdout); }
     });
@@ -39,10 +39,7 @@ function aye(command, includes, excludes) {
     .parMap(function (inc) {
       var next = this;
       return glob(inc, function (err, files) {
-        if (err) {
-          return next(err);
-        }
-        return next(null, files);
+        return err ? next(err) : next(null, files);
       });
     })
     .flatten()
@@ -55,10 +52,7 @@ function aye(command, includes, excludes) {
     .parMap(function (exc) {
       var next = this;
       return glob(exc, function (err, files) {
-        if (err) {
-          return next(err);
-        }
-        return next(null, files);
+        return err ? next(err) : next(null, files);
       });
     })
     .flatten()
