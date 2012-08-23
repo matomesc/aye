@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/matomesc/aye.png)](http://travis-ci.org/matomesc/aye)
 # aye
 
 > aye watches files for you and execs commands when they change
